@@ -10,7 +10,11 @@ typedef struct {
     char senha[50];
 } Usuario;
 
+//Deletar??
 int criar_tabela_usuarios(sqlite3* db);
+
+
+//Revisar
 int cadastrar_usuario(sqlite3* db, Usuario u);
 int login_usuario(sqlite3* db, const char* email, const char* senha);
 

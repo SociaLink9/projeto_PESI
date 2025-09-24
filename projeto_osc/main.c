@@ -6,11 +6,12 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <locale.h>
 
 // Função de logotipo(***PONTO A MELHORAR***)
-void mostrarLogo()
+void mostrarLogo(void)
 {
     printf(".====================================================================.\n");
     printf("!                                                                    !\n");
@@ -50,6 +51,8 @@ int main()
         {
         case 1: // Cadastro de OSCs
             printf("teste 1 ok");  // Arquivo da função usuarios.c/h
+            system("pause");
+            
             break;
 
         case 2: // Cadastro de usuários
@@ -59,7 +62,7 @@ int main()
 
             printf("teste 3 ok"); // Arquivo da função oscs.c/h
             break;
-        case 4: // Listagem das ações\
+        case 4: // Listagem das ações
 
             printf("teste 4 ok"); // Arquivo da função database.c/h
             break;

@@ -31,3 +31,7 @@ int login_usuario(sqlite3* db, const char* email, const char* senha) /*CONST CHA
     sqlite3_finalize(stmt);
     return rc == SQLITE_ROW;
 }
+
+/* difinir se é PF ou PJ
+   Fazer o cadastro "Salvo em .txt"
+  */
