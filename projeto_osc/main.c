@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <locale.h>
 
+
 // Função de logotipo(***PONTO A MELHORAR***)
 void mostrarLogo(void)
 {
@@ -52,7 +53,7 @@ int main()
         case 1: // Cadastro de OSCs
             printf("teste 1 ok");  // Arquivo da função usuarios.c/h
             system("pause");
-            
+
             break;
 
         case 2: // Cadastro de usuários
