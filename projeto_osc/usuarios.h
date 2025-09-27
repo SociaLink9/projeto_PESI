@@ -1,21 +1,21 @@
-#ifndef USUARIOS_H
-#define USUARIOS_H
+#ifndef USUARIO_H
+#define USUARIO_H
 
-#include "database.h"
+#include <stdio.h>
 
 typedef struct {
     int id;
-    char nome[50];
-    char email[50];
+    char nome[100];
+    char email[100];
     char senha[50];
-} Usuario;
+    char telefone[20];
+    char cidade[50];
+    int idade;
+    char area_atuacao[50];
+} Voluntario;
 
-//Deletar??
-int criar_tabela_usuarios(sqlite3* db);
+int fazerLogin(const char* email, const char* senha);
 
+int cadastro_voluntario(void);
 
-//Revisar
-int cadastrar_usuario(sqlite3* db, Usuario u);
-int login_usuario(sqlite3* db, const char* email, const char* senha);
-
-#endif
+#endif  
