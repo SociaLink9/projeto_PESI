@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <locale.h>
+#include "oscs.h"
 
 
 // Função de logotipo(***PONTO A MELHORAR***)
@@ -34,7 +35,7 @@ int main()
 {
 
     setlocale(LC_ALL, "pt-BR"); // Configura acentuação (Não está aceitando**Resolver problema**)
-
+    const *arquivo = "dados.txt";
     // Variáveis de seleção e controle.
     int selecao;
     bool cont = true;
@@ -51,7 +52,11 @@ int main()
         switch (selecao)
         {
         case 1: // Cadastro de OSCs
-            printf("teste 1 ok");  // Arquivo da função usuarios.c/h
+
+         //Preparar para escolha entre cadastro PF ou PJ
+            cadastrarPessoaFisica(arquivo);
+           
+            cadastrarPessoaJuridica(arquivo);
             system("pause");
 
             break;

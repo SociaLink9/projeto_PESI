@@ -122,6 +122,7 @@ int cadastro_voluntario() {
     return 1;  // Sucesso
 }
 
+/*
 int main() {
     int opcao;
     char email[100];
@@ -164,3 +165,4 @@ int main() {
 
     return 0;
 }
+*/
