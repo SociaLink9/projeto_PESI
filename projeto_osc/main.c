@@ -62,7 +62,7 @@ int main()
             break;
 
         case 2: // Cadastro de usuários
-            printf("teste 2 ok"); // Arquivo da função oscs.c/h
+            printf("testando 2 ok"); // Arquivo da função oscs.c/h
             break;
         case 3: // Registro de ações por OSCs
 
