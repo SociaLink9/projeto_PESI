@@ -90,7 +90,7 @@ int main()
         default:
 
             printf("Opcao invalida!\nTente novamente");
-            break;
+            break;//grupo2
         }
 
     } while (cont != false); // O loop se rompe quando a variavel for falsa;
