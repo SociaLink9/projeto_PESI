@@ -85,3 +85,71 @@ int main() {
 
     return 0;
 }
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_VOLT 100
+#define MAX_NOME 50
+#define MAX_FUNCAO 50
+
+// Estrutura para armazenar dados do voluntário
+typedef struct {
+    char nome[MAX_NOME];
+    char funcao[MAX_FUNCAO];
+} Voluntario;
+
+int main() {
+    Voluntario voluntarios[MAX_VOLT];
+    int total = 0;
+    int opcao;
+
+    do {
+        printf("\n--- MENU ---\n");
+        printf("1. Cadastrar voluntário\n");
+        printf("2. Listar voluntários\n");
+        printf("3. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+        getchar(); // Limpar o buffer do teclado
+
+        switch(opcao) {
+            case 1:
+                if (total < MAX_VOLT) {
+                    printf("Nome do voluntário: ");
+                    fgets(voluntarios[total].nome, MAX_NOME, stdin);
+                    voluntarios[total].nome[strcspn(voluntarios[total].nome, "\n")] = '\0'; // Remove \n
+
+                    printf("Função do voluntário: ");
+                    fgets(voluntarios[total].funcao, MAX_FUNCAO, stdin);
+                    voluntarios[total].funcao[strcspn(voluntarios[total].funcao, "\n")] = '\0'; // Remove \n
+
+                    total++;
+                    printf("Voluntário cadastrado com sucesso!\n");
+                } else {
+                    printf("Limite de voluntários atingido!\n");
+                }
+                break;
+            
+            case 2:
+                printf("\n--- Lista de Voluntários ---\n");
+                if (total == 0) {
+                    printf("Nenhum voluntário cadastrado.\n");
+                } else {
+                    for (int i = 0; i < total; i++) {
+                        printf("%d. Nome: %s | Função: %s\n", i + 1, voluntarios[i].nome, voluntarios[i].funcao);
+                    }
+                }
+                break;
+
+            case 3:
+                printf("Encerrando o programa.\n");
+                break;
+
+            default:
+                printf("Opção inválida!\n");
+        }
+
+    } while (opcao != 3);
+
+    return 0;
+}
