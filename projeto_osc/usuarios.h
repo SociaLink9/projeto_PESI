@@ -14,7 +14,8 @@ typedef struct {
     char area_atuacao[50];
 } Voluntario;
 
-int fazerLogin(const char* email, const char* senha);
+//Login não ira ser usado no momento.(Projetar para implementação futura).
+//int fazerLogin(const char* email, const char* senha);
 
 int cadastro_voluntario(void);
 

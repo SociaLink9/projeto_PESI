@@ -1,0 +1,11 @@
+Pessoa Fisica | Nome: gabriel | Data Nasc.: 24/11/1998 | CPF: 11523996404 | Email: ihagsdogap | Endereco: �akhsbd, aasd, asfaf, Nº 11, CEP 11424142
+CPF/CNPJAcao: 
+NomeAcao: 1523996404
+LocalAcao: hh
+DescriçãoAcao: hh
+---
+CPF/CNPJAcao: 
+NomeAcao: 1523996404
+LocalAcao: absd
+DescriçãoAcao: jsdf
+---

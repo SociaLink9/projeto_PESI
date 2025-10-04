@@ -5,11 +5,13 @@
 #include <locale.h>
 #include "oscs.h"
 
-
 // ======= FUNÇÕES DE APOIO =======
-int somenteNumeros(char *str) {
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (!isdigit(str[i])) {
+int somenteNumeros(char *str)
+{
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        if (!isdigit(str[i]))
+        {
             return 0;
         }
     }
@@ -17,15 +19,19 @@ int somenteNumeros(char *str) {
 }
 
 // Verifica se documento já existe
-int jaCadastrado(const char *arquivoNome, const char *documento) {
+int jaCadastrado(const char *arquivoNome, const char *documento)
+{
     FILE *arq = fopen(arquivoNome, "r");
-    if (arq == NULL) {
+    if (arq == NULL)
+    {
         return 0;
     }
 
     char linha[500];
-    while (fgets(linha, sizeof(linha), arq)) {
-        if (strstr(linha, documento) != NULL) {
+    while (fgets(linha, sizeof(linha), arq))
+    {
+        if (strstr(linha, documento) != NULL)
+        {
             fclose(arq);
             return 1;
         }
@@ -35,7 +41,8 @@ int jaCadastrado(const char *arquivoNome, const char *documento) {
 }
 
 // ======= CADASTROS =======
-void cadastrarPessoaFisica(const char *arquivoNome) {
+void cadastrarPessoaFisica(const char *arquivoNome)
+{
     PessoaFisica pf;
 
     printf("\n--- Cadastro de Pessoa Fisica ---\n");
@@ -47,26 +54,30 @@ void cadastrarPessoaFisica(const char *arquivoNome) {
     fgets(pf.dataNascimento, TAM_DATA, stdin);
     pf.dataNascimento[strcspn(pf.dataNascimento, "\n")] = 0;
 
-    do {
-    printf("CPF (11 dígitos, apenas números): ");
-    fgets(pf.cpf, TAM_CPF, stdin);
-    pf.cpf[strcspn(pf.cpf, "\n")] = 0;
+    do
+    {
+        printf("CPF (11 dígitos, apenas números): ");
+        fgets(pf.cpf, TAM_CPF, stdin);
+        pf.cpf[strcspn(pf.cpf, "\n")] = 0;
 
-    // limpa excesso de caracteres
-    if (strlen(pf.cpf) == TAM_CPF - 1 && pf.cpf[TAM_CPF - 2] != '\0') {
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-    }
+        // limpa excesso de caracteres
+        if (strlen(pf.cpf) == TAM_CPF - 1 && pf.cpf[TAM_CPF - 2] != '\0')
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF)
+                ;
+        }
 
-    if (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf)) {
-        printf("CPF inválido! Tente novamente.\n");
-    }
-    else if (jaCadastrado(arquivoNome, pf.cpf)) {
-        printf("CPF já cadastrado no sistema!\n");
-        return;
-    }
-} while (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf));
-
+        if (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf))
+        {
+            printf("CPF inválido! Tente novamente.\n");
+        }
+        else if (jaCadastrado(arquivoNome, pf.cpf))
+        {
+            printf("CPF já cadastrado no sistema!\n");
+            return;
+        }
+    } while (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf));
 
     printf("Email: ");
     fgets(pf.email, TAM_EMAIL, stdin);
@@ -94,7 +105,8 @@ void cadastrarPessoaFisica(const char *arquivoNome) {
     pf.endereco.cep[strcspn(pf.endereco.cep, "\n")] = 0;
 
     FILE *arquivo = fopen(arquivoNome, "a");
-    if (arquivo == NULL) {
+    if (arquivo == NULL)
+    {
         printf("Erro ao abrir o arquivo!\n");
         return;
     }
@@ -110,7 +122,8 @@ void cadastrarPessoaFisica(const char *arquivoNome) {
     printf("? Cadastro realizado com sucesso!\n");
 }
 
-void cadastrarPessoaJuridica(const char *arquivoNome) {
+void cadastrarPessoaJuridica(const char *arquivoNome)
+{
     PessoaJuridica pj;
 
     printf("\n--- Cadastro de Pessoa Juridica ---\n");
@@ -118,27 +131,31 @@ void cadastrarPessoaJuridica(const char *arquivoNome) {
     fgets(pj.razaoSocial, TAM_NOME, stdin);
     pj.razaoSocial[strcspn(pj.razaoSocial, "\n")] = 0;
 
-    do {
-    printf("CNPJ (14 dígitos, apenas números): ");
-    fgets(pj.cnpj, TAM_CNPJ, stdin);
-    pj.cnpj[strcspn(pj.cnpj, "\n")] = 0;
+    do
+    {
+        printf("CNPJ (14 dígitos, apenas números): ");
+        fgets(pj.cnpj, TAM_CNPJ, stdin);
+        pj.cnpj[strcspn(pj.cnpj, "\n")] = 0;
 
-    // limpa excesso de caracteres
-    if (strlen(pj.cnpj) == TAM_CNPJ - 1 && pj.cnpj[TAM_CNPJ - 2] != '\0') {
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-    }
+        // limpa excesso de caracteres
+        if (strlen(pj.cnpj) == TAM_CNPJ - 1 && pj.cnpj[TAM_CNPJ - 2] != '\0')
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF)
+                ;
+        }
 
-    if (strlen(pj.cnpj) != 14 || !somenteNumeros(pj.cnpj)) {
-        printf("CNPJ inválido! Tente novamente.\n");
-    }
-    else if (jaCadastrado(arquivoNome, pj.cnpj)) {
-        printf("CNPJ já cadastrado no sistema!\n");
-        return;
-    }
+        if (strlen(pj.cnpj) != 14 || !somenteNumeros(pj.cnpj))
+        {
+            printf("CNPJ inválido! Tente novamente.\n");
+        }
+        else if (jaCadastrado(arquivoNome, pj.cnpj))
+        {
+            printf("CNPJ já cadastrado no sistema!\n");
+            return;
+        }
     } while (strlen(pj.cnpj) != 14 || !somenteNumeros(pj.cnpj));
 
-    
     printf("Email: ");
     fgets(pj.email, TAM_EMAIL, stdin);
     pj.email[strcspn(pj.email, "\n")] = 0;
@@ -165,7 +182,8 @@ void cadastrarPessoaJuridica(const char *arquivoNome) {
     pj.endereco.cep[strcspn(pj.endereco.cep, "\n")] = 0;
 
     FILE *arquivo = fopen(arquivoNome, "a");
-    if (arquivo == NULL) {
+    if (arquivo == NULL)
+    {
         printf("Erro ao abrir o arquivo!\n");
         return;
     }
@@ -180,6 +198,86 @@ void cadastrarPessoaJuridica(const char *arquivoNome) {
     fclose(arquivo);
     printf("? Cadastro realizado com sucesso!\n");
 }
+
+// ======= PROBLEMA NA FUNÇÃO ABAIXO =======
+int verificarCadastro(const char *cpf_cnpj)
+{
+    FILE *arquivo = fopen("dados.txt", "r");
+    if (!arquivo)
+    {
+        printf("Erro ao abrir o arquivo de cadastros.\n");
+        return 0;
+    }
+    char linha[500];
+    char busca[30];
+
+    // Monta a string de busca
+    if (strlen(cpf_cnpj) == 11)
+        sprintf(busca, "CPF: %s", cpf_cnpj);
+    else if (strlen(cpf_cnpj) == 14)
+        sprintf(busca, "CNPJ: %s", cpf_cnpj);
+    else
+        return 0;
+
+    while (fgets(linha, sizeof(linha), arquivo))
+    {
+        if (strstr(linha, busca))
+        {
+            fclose(arquivo);
+            return 1;
+        }
+    }
+    fclose(arquivo);
+    return 0;
+}
+
+void cadastrarAcao()
+{
+    NovaAcao NovaAc;
+
+    printf("Digite seu CPF ou CNPJ: ");
+    fgets(NovaAc.cpf_cnpj, sizeof(NovaAc.cpf_cnpj), stdin);
+    NovaAc.cpf_cnpj[strcspn(NovaAc.cpf_cnpj, "\n")] = 0;
+    getchar();
+
+    if (!verificarCadastro(NovaAc.cpf_cnpj))
+    {
+        printf("Cadastro não encontrado. Apenas PF ou PJ registrados podem cadastrar ações.\n");
+        return;
+    }
+
+    printf("Nome da ação: ");
+    fgets(NovaAc.nomeAcao, sizeof(NovaAc.nomeAcao), stdin);
+    NovaAc.nomeAcao[strcspn(NovaAc.nomeAcao, "\n")] = 0;
+    getchar();
+
+
+    printf("Local da ação: ");
+    fgets(NovaAc.localAcao, sizeof(NovaAc.localAcao), stdin);
+    NovaAc.localAcao[strcspn(NovaAc.localAcao, "\n")] = 0;
+    getchar();
+
+    printf("Descrição da ação: ");
+    fgets(NovaAc.descricao, sizeof(NovaAc.descricao), stdin);
+    NovaAc.descricao[strcspn(NovaAc.descricao, "\n")] = 0;
+    getchar();
+
+    FILE *arquivo = fopen("dados.txt", "a");
+    if (!arquivo)
+    {
+        printf("Erro ao salvar a ação.\n");
+        return;
+    }
+
+    fprintf(arquivo, "CPF/CNPJAcao: %s\nNomeAcao: %s\nLocalAcao: %s\nDescriçãoAcao: %s\n---\n",
+            NovaAc.cpf_cnpj, NovaAc.nomeAcao, NovaAc.localAcao, NovaAc.descricao);
+    fclose(arquivo);
+
+    printf("Ação cadastrada com sucesso!\n");
+
+    return;
+}
+
 /*
 // ======= MAIN =======
 int main() {

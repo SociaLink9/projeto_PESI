@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
-
+/*
 int fazerLogin(const char* email, const char* senha) {
     FILE* arquivo = fopen("dados.txt", "r");
     if (arquivo == NULL) {
@@ -14,7 +14,7 @@ int fazerLogin(const char* email, const char* senha) {
     while (fgets(linha, sizeof(linha), arquivo)) { /* fgets é uma funçao quer vai ler linha 
                                                     por linha e a mesma coloca na variavel "linha" criada. */
         /* abaixo sao as variaveis temporarias criadas para analisar as linhas do arquivo e consequetemente fazer a comparaçao abaixo do
-        email e senha do usuario para login */
+        email e senha do usuario para login *//*
         int id_temp;
         char nome_temp[100], email_temp[100], senha_temp[50];
         char telefone_temp[20], cidade_temp[50], area_temp[50];
@@ -22,12 +22,12 @@ int fazerLogin(const char* email, const char* senha) {
           
         // Abaixo o sscanf vai ler as linhas dos arquivo e vai preencher as variaveis de a cordo com o formato
         if (sscanf(linha, "%d,%99[^,],%99[^,],%49[^,],%19[^,],%49[^,],%d,%49[^\n]",/* %99[^,] lê até 99 caracteres, qualquer coisa exceto vírgula. 
-                                                                                    quando chegar  na virgula ele para e vai pra outra informação dps da virgula.*/
+                                                                                    quando chegar  na virgula ele para e vai pra outra informação dps da virgula.*//*
 
                    &id_temp, nome_temp, email_temp, senha_temp,
                    telefone_temp, cidade_temp, &idade_temp, area_temp) == 8) {// sscanf verifica se ele leu exatamente 8 campos . Se sim (==8), entra no bloco { }. 
             if (strcmp(email_temp, email) == 0 && strcmp(senha_temp, senha) == 0) {/* strcmp é uma Função que compara duas strings, email_temp que foi lido do arquivo (dados.txt) 
-                                                                                 e o email vindo do usuario. se for == 0 ai deu certo o login*/ 
+                                                                                 e o email vindo do usuario. se for == 0 ai deu certo o login*/ /*
                                                                                  //assim vale a mesma coisa para a senha
                 fclose(arquivo);
                 return 1;  // Login bem-sucedido
@@ -38,7 +38,7 @@ int fazerLogin(const char* email, const char* senha) {
     fclose(arquivo);
     return 0;  // Não encontrado
 }
-
+*/
 int cadastro_voluntario() {
     Voluntario novoVol;
     

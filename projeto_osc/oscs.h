@@ -1,6 +1,7 @@
 #ifndef OSCS_H
 #define OSCS_H
 
+#define MAX 256
 #define TAM_NOME 100
 #define TAM_CPF 13
 #define TAM_CNPJ 16
@@ -35,6 +36,15 @@ typedef struct {
     Endereco endereco;
 } PessoaJuridica;
 
+typedef struct 
+{
+    char cpf_cnpj[MAX];
+    char nomeAcao[MAX];
+    char localAcao[MAX];
+    char descricao[MAX];
+} NovaAcao;
+
+
 // Funções de apoio
 int somenteNumeros(char *str);
 int jaCadastrado(const char *arquivoNome, const char *documento);
@@ -42,5 +52,7 @@ int jaCadastrado(const char *arquivoNome, const char *documento);
 // Funções de cadastro
 void cadastrarPessoaFisica(const char *arquivoNome);
 void cadastrarPessoaJuridica(const char *arquivoNome);
+int verificarCadastro(const char *cpf_cnpj);
+void cadastrarAcao();
 
 #endif
