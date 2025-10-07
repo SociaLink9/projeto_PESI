@@ -249,18 +249,17 @@ void cadastrarAcao()
     printf("Nome da ação: ");
     fgets(NovaAc.nomeAcao, sizeof(NovaAc.nomeAcao), stdin);
     NovaAc.nomeAcao[strcspn(NovaAc.nomeAcao, "\n")] = 0;
-    getchar();
-
+    
 
     printf("Local da ação: ");
     fgets(NovaAc.localAcao, sizeof(NovaAc.localAcao), stdin);
     NovaAc.localAcao[strcspn(NovaAc.localAcao, "\n")] = 0;
-    getchar();
+    
 
     printf("Descrição da ação: ");
     fgets(NovaAc.descricao, sizeof(NovaAc.descricao), stdin);
     NovaAc.descricao[strcspn(NovaAc.descricao, "\n")] = 0;
-    getchar();
+   
 
     FILE *arquivo = fopen("dados.txt", "a");
     if (!arquivo)
@@ -277,40 +276,3 @@ void cadastrarAcao()
 
     return;
 }
-
-/*
-// ======= MAIN =======
-int main() {
-
-    setlocale(LC_ALL,"portuguese");
-
-    int opcao;
-    const char *arquivoNome = "usuarios.txt";
-
-    do {
-        printf("\n==== Sistema de Cadastro ====\n");
-        printf("1 - Cadastrar Pessoa Fisica (CPF)\n");
-        printf("2 - Cadastrar Pessoa Juridica (CNPJ)\n");
-        printf("0 - Sair\n");
-        printf("Escolha: ");
-        scanf("%d", &opcao);
-        getchar(); // limpar buffer
-
-        switch (opcao) {
-            case 1:
-                cadastrarPessoaFisica(arquivoNome);
-                break;
-            case 2:
-                cadastrarPessoaJuridica(arquivoNome);
-                break;
-            case 0:
-                printf("Saindo...\n");
-                break;
-            default:
-                printf("Opção inválida!\n");
-        }
-    } while (opcao != 0);
-
-    return 0;
-}
-*/

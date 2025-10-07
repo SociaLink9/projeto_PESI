@@ -3,6 +3,15 @@
  Curso: Análise e Desenvolvimento de Sistemas
  Líder de projeto: Gabriel Albuquerque N. de Oliveira
  Integrantes:
+ David Richard Lima de Souza
+ Luan Santos Alves Pequeno Da Silva
+ Pedro Caio Francisco da Silva
+ Vinicius da Silva ramos
+ Yago vinicius de freitas silva
+ Geovane Alves da Silva Filho
+ Gabriela Torres Guerra da Fonte
+ Guilherme Morais Cavalcante
+ João Vitor Santos silva
  */
 
 #include <stdio.h>
@@ -52,7 +61,7 @@ int main()
     do
     {
         // Exibe as opções do menu
-        
+
         printf("\nSelecione uma opcao:\n\n1. Cadastro de OSCs\n2. Cadastro de Usuários\n3. Registro de Ações por OSCs\n4. Listagem de Ações\n5. Inscrição de Usuários em Ações\n6. Visualização de Participantes por Ação\n0. Sair\nDigite o número da opção desejada: ");
         scanf("%d", &selecao);
         getchar();
@@ -71,19 +80,19 @@ int main()
                 switch (selecao)
                 {
                 case 1:
-                system("cls");
+                    system("cls");
                     // Chama função para cadastrar Pessoa Física
                     cadastrarPessoaFisica(arquivo);
                     valid = true;
                     break;
                 case 2:
-                system("cls");
+                    system("cls");
                     // Chama função para cadastrar Pessoa Jurídica
                     cadastrarPessoaJuridica(arquivo);
                     valid = true;
                     break;
                 default:
-                system("cls");
+                    system("cls");
                     // Opção inválida, solicita nova tentativa
                     printf("\nOpção invalida!\nTente novamente!");
                     valid = false;
@@ -96,43 +105,49 @@ int main()
             system("cls");
             break;
 
-//*Fase cadastro de OSC's concluida e pronta para testes.*
+            //*Fase cadastro de OSC's concluida e pronta para testes.*
 
         case 2: // Cadastro de usuários
-        system("cls");
+            system("cls");
             // Chama função para cadastrar voluntário
             cadastro_voluntario();
             system("pause");
             system("cls");
             break;
 
-//*Fase cadastro de Voluntarios concluida e pronta para testes.*
+            //*Fase cadastro de Voluntarios concluida e pronta para testes.*
 
         case 3: // Registro de ações por OSCs
-        system("cls");
+            system("cls");
             // Chama função para cadastrar ação
             cadastrarAcao();
             system("pause");
             system("cls");
             break;
-//*Fase cadastro de ações concluida e pronta para testes.*
+            //*Fase cadastro de ações concluida e pronta para testes.*
 
         case 4: // Listagem das ações
-        system("cls");
+            system("cls");
             lerTodasAcoes(arquivo);
             system("pause");
             system("cls");
             break;
-//*Fase leitura de ações concluida e pronta para testes.*
+            //*Fase leitura de ações concluida e pronta para testes.*
 
         case 5: // Inscrição de usuários em ações
-            // Exemplo de chamada (deve ser substituído pela função real)
-            printf("teste 5 ok"); // Arquivo da função database.c/h
+            system("cls");
+            cadastrarVoluntarioInterativo();
+            system("pause");
+            system("cls");
             break;
+            //*Fase inscrições de voluntario nas ações concluida e pronta para testes.*
 
         case 6: // Visualização de participantes por ação
-            // Exemplo de chamada (deve ser substituído pela função real)
-            printf("teste 6 ok"); // Arquivo da função database.c/h
+            system("cls");
+            mostrarUsuariosPorAcao();
+            system("pause");
+            system("cls");
+
             break;
 
         case 0: // Finaliza o programa

@@ -13,7 +13,8 @@
 #define TAM_RUA 100
 #define TAM_NUMERO 10
 
-typedef struct {
+typedef struct
+{
     char cidade[TAM_CIDADE];
     char bairro[TAM_BAIRRO];
     char rua[TAM_RUA];
@@ -21,7 +22,8 @@ typedef struct {
     char cep[TAM_CEP];
 } Endereco;
 
-typedef struct {
+typedef struct
+{
     char nome[TAM_NOME];
     char dataNascimento[TAM_DATA];
     char cpf[TAM_CPF];
@@ -29,21 +31,21 @@ typedef struct {
     Endereco endereco;
 } PessoaFisica;
 
-typedef struct {
+typedef struct
+{
     char razaoSocial[TAM_NOME];
     char cnpj[TAM_CNPJ];
     char email[TAM_EMAIL];
     Endereco endereco;
 } PessoaJuridica;
 
-typedef struct 
+typedef struct
 {
     char cpf_cnpj[MAX];
     char nomeAcao[MAX];
     char localAcao[MAX];
     char descricao[MAX];
 } NovaAcao;
-
 
 // Funções de apoio
 int somenteNumeros(char *str);
