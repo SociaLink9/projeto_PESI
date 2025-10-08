@@ -12,12 +12,12 @@ void removeNewline(char *str) {
     str[strcspn(str, "\n")] = 0;
 }
 
-// ========== FunÁıes para cadastro, listagem e interaÁ„o =========
+// ========== Fun√ß√µes para cadastro, listagem e intera√ß√£o =========
 
-// FunÁıes de cadastro para pessoas fÌsicas e jurÌdicas
+// Fun√ß√µes de cadastro para pessoas f√≠sicas e jur√≠dicas
 void cadastrarPessoaFisica(const char *arquivo) {
     char nome[MAX_NOME], cpf[15], dataNascimento[12], telefone[20], email[100];
-    printf("Cadastro Pessoa FÌsica:\n");
+    printf("Cadastro Pessoa F√≠sica:\n");
     printf("Nome: ");
     fgets(nome, MAX_NOME, stdin);
     removeNewline(nome);
@@ -47,12 +47,12 @@ void cadastrarPessoaFisica(const char *arquivo) {
     fprintf(fp, "PF;%s;%s;%s;%s;%s\n", nome, cpf, dataNascimento, telefone, email);
     fclose(fp);
 
-    printf("Pessoa fÌsica cadastrada com sucesso!\n");
+    printf("Pessoa f√≠sica cadastrada com sucesso!\n");
 }
 
 void cadastrarPessoaJuridica(const char *arquivo) {
     char nome[MAX_NOME], cnpj[20], endereco[150], telefone[20], email[100];
-    printf("Cadastro Pessoa JurÌdica (OSC):\n");
+    printf("Cadastro Pessoa Jur√≠dica (OSC):\n");
     printf("Nome da empresa: ");
     fgets(nome, MAX_NOME, stdin);
     removeNewline(nome);
@@ -61,7 +61,7 @@ void cadastrarPessoaJuridica(const char *arquivo) {
     fgets(cnpj, 20, stdin);
     removeNewline(cnpj);
 
-    printf("EndereÁo: ");
+    printf("Endere√ßo: ");
     fgets(endereco, 150, stdin);
     removeNewline(endereco);
 
@@ -82,13 +82,13 @@ void cadastrarPessoaJuridica(const char *arquivo) {
     fprintf(fp, "PJ;%s;%s;%s;%s;%s\n", nome, cnpj, endereco, telefone, email);
     fclose(fp);
 
-    printf("Pessoa jurÌdica cadastrada com sucesso!\n");
+    printf("Pessoa jur√≠dica cadastrada com sucesso!\n");
 }
 
-// Cadastro volunt·rio simplificado para exemplo
+// Cadastro volunt√°rio simplificado para exemplo
 void cadastro_voluntario(void) {
     char nome[MAX_NOME], telefone[20], email[100];
-    printf("Cadastro de Volunt·rio:\n");
+    printf("Cadastro de Volunt√°rio:\n");
     printf("Nome: ");
     fgets(nome, MAX_NOME, stdin);
     removeNewline(nome);
@@ -103,25 +103,25 @@ void cadastro_voluntario(void) {
 
     FILE *fp = fopen("voluntarios.txt", "a");
     if (!fp) {
-        printf("Erro ao abrir arquivo para salvar volunt·rio.\n");
+        printf("Erro ao abrir arquivo para salvar volunt√°rio.\n");
         return;
     }
 
     fprintf(fp, "%s;%s;%s\n", nome, telefone, email);
     fclose(fp);
 
-    printf("Volunt·rio cadastrado com sucesso!\n");
+    printf("Volunt√°rio cadastrado com sucesso!\n");
 }
 
-// Cadastro de aÁ„o
+// Cadastro de a√ß√£o
 void cadastrarAcao(void) {
     char nome[MAX_NOME], descricao[256], data[12], local[MAX_NOME];
-    printf("Cadastro de AÁ„o:\n");
-    printf("Nome da aÁ„o: ");
+    printf("Cadastro de A√ß√£o:\n");
+    printf("Nome da a√ß√£o: ");
     fgets(nome, MAX_NOME, stdin);
     removeNewline(nome);
 
-    printf("DescriÁ„o: ");
+    printf("Descri√ß√£o: ");
     fgets(descricao, 256, stdin);
     removeNewline(descricao);
 
@@ -135,77 +135,77 @@ void cadastrarAcao(void) {
 
     FILE *fp = fopen("acoes.txt", "a");
     if (!fp) {
-        printf("Erro ao abrir arquivo para salvar aÁ„o.\n");
+        printf("Erro ao abrir arquivo para salvar a√ß√£o.\n");
         return;
     }
 
     fprintf(fp, "%s;%s;%s;%s\n", nome, descricao, data, local);
     fclose(fp);
 
-    printf("AÁ„o cadastrada com sucesso!\n");
+    printf("A√ß√£o cadastrada com sucesso!\n");
 }
 
-// Listar todas as aÁıes
+// Listar todas as a√ß√µes
 void lerTodasAcoes(const char *arquivo) {
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Nenhuma aÁ„o cadastrada.\n");
+        printf("Nenhuma a√ß√£o cadastrada.\n");
         return;
     }
 
     char linha[MAX_LINHA];
-    printf("Lista de AÁıes:\n");
+    printf("Lista de A√ß√µes:\n");
     while (fgets(linha, sizeof(linha), fp)) {
         char nome[MAX_NOME], descricao[256], data[12], local[MAX_NOME];
         sscanf(linha, "%[^;];%[^;];%[^;];%[^\n]", nome, descricao, data, local);
 
-        printf("\nNome: %s\nDescriÁ„o: %s\nData: %s\nLocal: %s\n", nome, descricao, data, local);
+        printf("\nNome: %s\nDescri√ß√£o: %s\nData: %s\nLocal: %s\n", nome, descricao, data, local);
     }
     fclose(fp);
 }
 
-// Inscrever usu·rio em aÁ„o
+// Inscrever usu√°rio em a√ß√£o
 void cadastrarVoluntarioInterativo(void) {
     char nomeUsuario[MAX_NOME], nomeAcao[MAX_NOME];
-    printf("InscriÁ„o de Usu·rio em AÁ„o:\n");
+    printf("Inscri√ß√£o de Usu√°rio em A√ß√£o:\n");
 
-    printf("Nome do usu·rio: ");
+    printf("Nome do usu√°rio: ");
     fgets(nomeUsuario, MAX_NOME, stdin);
     removeNewline(nomeUsuario);
 
-    printf("Nome da aÁ„o: ");
+    printf("Nome da a√ß√£o: ");
     fgets(nomeAcao, MAX_NOME, stdin);
     removeNewline(nomeAcao);
 
     FILE *fp = fopen("inscricoes.txt", "a");
     if (!fp) {
-        printf("Erro ao abrir arquivo para salvar inscriÁ„o.\n");
+        printf("Erro ao abrir arquivo para salvar inscri√ß√£o.\n");
         return;
     }
 
     fprintf(fp, "%s;%s\n", nomeUsuario, nomeAcao);
     fclose(fp);
 
-    printf("InscriÁ„o realizada com sucesso!\n");
+    printf("Inscri√ß√£o realizada com sucesso!\n");
 }
 
-// Mostrar usu·rios inscritos por aÁ„o
+// Mostrar usu√°rios inscritos por a√ß√£o
 void mostrarUsuariosPorAcao(void) {
     char nomeAcao[MAX_NOME];
-    printf("VisualizaÁ„o de Participantes por AÁ„o:\n");
-    printf("Digite o nome da aÁ„o: ");
+    printf("Visualiza√ß√£o de Participantes por A√ß√£o:\n");
+    printf("Digite o nome da a√ß√£o: ");
     fgets(nomeAcao, MAX_NOME, stdin);
     removeNewline(nomeAcao);
 
     FILE *fp = fopen("inscricoes.txt", "r");
     if (!fp) {
-        printf("Nenhuma inscriÁ„o encontrada.\n");
+        printf("Nenhuma inscri√ß√£o encontrada.\n");
         return;
     }
 
     char linha[MAX_LINHA];
     bool encontrou = false;
-    printf("Usu·rios inscritos na aÁ„o \"%s\":\n", nomeAcao);
+    printf("Usu√°rios inscritos na a√ß√£o \"%s\":\n", nomeAcao);
 
     while (fgets(linha, sizeof(linha), fp)) {
         char usuario[MAX_NOME], acao[MAX_NOME];
@@ -217,12 +217,12 @@ void mostrarUsuariosPorAcao(void) {
         }
     }
 
-    if (!encontrou) printf("Nenhum usu·rio inscrito nessa aÁ„o.\n");
+    if (!encontrou) printf("Nenhum usu√°rio inscrito nessa a√ß√£o.\n");
 
     fclose(fp);
 }
 
-// ========== FunÁıes para editar e excluir registros ==========
+// ========== Fun√ß√µes para editar e excluir registros ==========
 
 void editarPessoa(const char *arquivo) {
     char nomeBusca[MAX_NOME];
@@ -232,12 +232,12 @@ void editarPessoa(const char *arquivo) {
 
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Arquivo n„o encontrado.\n");
+        printf("Arquivo n√£o encontrado.\n");
         return;
     }
     FILE *temp = fopen("temp.txt", "w");
     if (!temp) {
-        printf("Erro ao criar arquivo tempor·rio.\n");
+        printf("Erro ao criar arquivo tempor√°rio.\n");
         fclose(fp);
         return;
     }
@@ -305,7 +305,7 @@ void editarPessoa(const char *arquivo) {
                 fgets(cnpj, 20, stdin);
                 removeNewline(cnpj);
 
-                printf("EndereÁo: ");
+                printf("Endere√ßo: ");
                 fgets(endereco, 150, stdin);
                 removeNewline(endereco);
 
@@ -336,7 +336,7 @@ void editarPessoa(const char *arquivo) {
     fclose(temp);
 
     if (!encontrado) {
-        printf("Pessoa n„o encontrada.\n");
+        printf("Pessoa n√£o encontrada.\n");
         remove("temp.txt");
     } else {
         remove(arquivo);
@@ -353,12 +353,12 @@ void excluirPessoa(const char *arquivo) {
 
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Arquivo n„o encontrado.\n");
+        printf("Arquivo n√£o encontrado.\n");
         return;
     }
     FILE *temp = fopen("temp.txt", "w");
     if (!temp) {
-        printf("Erro ao criar arquivo tempor·rio.\n");
+        printf("Erro ao criar arquivo tempor√°rio.\n");
         fclose(fp);
         return;
     }
@@ -372,7 +372,7 @@ void excluirPessoa(const char *arquivo) {
 
         if (strcmp(nome, nomeBusca) == 0) {
             encontrado = true;
-            // N„o escreve - exclui
+            // N√£o escreve - exclui
             continue;
         } else {
             fputs(linha, temp);
@@ -383,29 +383,29 @@ void excluirPessoa(const char *arquivo) {
     fclose(temp);
 
     if (!encontrado) {
-        printf("Pessoa n„o encontrada.\n");
+        printf("Pessoa n√£o encontrada.\n");
         remove("temp.txt");
     } else {
         remove(arquivo);
         rename("temp.txt", arquivo);
-        printf("Registro excluÌdo com sucesso.\n");
+        printf("Registro exclu√≠do com sucesso.\n");
     }
 }
 
 void editarAcao(const char *arquivo) {
     char nomeBusca[MAX_NOME];
-    printf("Digite o nome da aÁ„o que deseja editar: ");
+    printf("Digite o nome da a√ß√£o que deseja editar: ");
     fgets(nomeBusca, MAX_NOME, stdin);
     removeNewline(nomeBusca);
 
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Arquivo n„o encontrado.\n");
+        printf("Arquivo n√£o encontrado.\n");
         return;
     }
     FILE *temp = fopen("temp.txt", "w");
     if (!temp) {
-        printf("Erro ao criar arquivo tempor·rio.\n");
+        printf("Erro ao criar arquivo tempor√°rio.\n");
         fclose(fp);
         return;
     }
@@ -455,7 +455,7 @@ void editarAcao(const char *arquivo) {
     fclose(temp);
 
     if (!encontrado) {
-        printf("AÁ„o n„o encontrada.\n");
+        printf("A√ß√£o n√£o encontrada.\n");
         remove("temp.txt");
     } else {
         remove(arquivo);
@@ -466,18 +466,18 @@ void editarAcao(const char *arquivo) {
 
 void excluirAcao(const char *arquivo) {
     char nomeBusca[MAX_NOME];
-    printf("Digite o nome da aÁ„o que deseja excluir: ");
+    printf("Digite o nome da a√ß√£o que deseja excluir: ");
     fgets(nomeBusca, MAX_NOME, stdin);
     removeNewline(nomeBusca);
 
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Arquivo n„o encontrado.\n");
+        printf("Arquivo n√£o encontrado.\n");
         return;
     }
     FILE *temp = fopen("temp.txt", "w");
     if (!temp) {
-        printf("Erro ao criar arquivo tempor·rio.\n");
+        printf("Erro ao criar arquivo tempor√°rio.\n");
         fclose(fp);
         return;
     }
@@ -491,7 +491,7 @@ void excluirAcao(const char *arquivo) {
 
         if (strcmp(nome, nomeBusca) == 0) {
             encontrado = true;
-            // n„o escreve = exclui
+            // n√£o escreve = exclui
             continue;
         } else {
             fputs(linha, temp);
@@ -502,34 +502,34 @@ void excluirAcao(const char *arquivo) {
     fclose(temp);
 
     if (!encontrado) {
-        printf("AÁ„o n„o encontrada.\n");
+        printf("A√ß√£o n√£o encontrada.\n");
         remove("temp.txt");
     } else {
         remove(arquivo);
         rename("temp.txt", arquivo);
-        printf("Registro excluÌdo com sucesso.\n");
+        printf("Registro exclu√≠do com sucesso.\n");
     }
 }
 
 void excluirInscricao(const char *arquivo) {
     char nomeUsuario[MAX_NOME], nomeAcao[MAX_NOME];
-    printf("Digite o nome do usu·rio para excluir inscriÁ„o: ");
+    printf("Digite o nome do usu√°rio para excluir inscri√ß√£o: ");
     fgets(nomeUsuario, MAX_NOME, stdin);
     removeNewline(nomeUsuario);
 
-    printf("Digite o nome da aÁ„o para excluir inscriÁ„o: ");
+    printf("Digite o nome da a√ß√£o para excluir inscri√ß√£o: ");
     fgets(nomeAcao, MAX_NOME, stdin);
     removeNewline(nomeAcao);
 
     FILE *fp = fopen(arquivo, "r");
     if (!fp) {
-        printf("Arquivo de inscriÁıes n„o encontrado.\n");
+        printf("Arquivo de inscri√ß√µes n√£o encontrado.\n");
         return;
     }
 
     FILE *temp = fopen("temp.txt", "w");
     if (!temp) {
-        printf("Erro ao criar arquivo tempor·rio.\n");
+        printf("Erro ao criar arquivo tempor√°rio.\n");
         fclose(fp);
         return;
     }
@@ -543,7 +543,7 @@ void excluirInscricao(const char *arquivo) {
 
         if (strcmp(usuario, nomeUsuario) == 0 && strcmp(acao, nomeAcao) == 0) {
             encontrado = true;
-            continue; // n„o escreve, exclui
+            continue; // n√£o escreve, exclui
         } else {
             fputs(linha, temp);
         }
@@ -553,16 +553,16 @@ void excluirInscricao(const char *arquivo) {
     fclose(temp);
 
     if (!encontrado) {
-        printf("InscriÁ„o n„o encontrada.\n");
+        printf("Inscri√ß√£o n√£o encontrada.\n");
         remove("temp.txt");
     } else {
         remove(arquivo);
         rename("temp.txt", arquivo);
-        printf("InscriÁ„o excluÌda com sucesso.\n");
+        printf("Inscri√ß√£o exclu√≠da com sucesso.\n");
     }
 }
 
-// FunÁ„o de logotipo
+// Fun√ß√£o de logotipo
 void mostrarLogo(void) {
     printf(".====================================================================.\n");
     printf("!                                                                    !\n");
@@ -573,12 +573,12 @@ void mostrarLogo(void) {
     printf("!   |||||||  ||||||  ||||||  || ||   || ||||||| || ||    ||| ||   || !\n");
     printf("!                                                                    !\n");
     printf("!   Plataforma de Engajamento Social Integrado (P.E.S.I.)            !\n");
-    printf("!   Bem-vindo ‡ transformaÁ„o digital do engajamento!                !\n");
-    printf("!   Conectando ideias, pessoas e propÛsitos com inteligÍncia.        !\n");
+    printf("!   Bem-vindo √† transforma√ß√£o digital do engajamento!                !\n");
+    printf("!   Conectando ideias, pessoas e prop√≥sitos com intelig√™ncia.        !\n");
     printf(".====================================================================.\n");
 }
 
-// ========== FunÁ„o principal ==========
+// ========== Fun√ß√£o principal ==========
 
 int main() {
     setlocale(LC_ALL, "Portuguese_Brazil.1252");
@@ -595,19 +595,19 @@ int main() {
 
     do {
         printf("\nSelecione uma opcao:\n\n");
-        printf("1. Cadastro de OSCs (Pessoa JurÌdica)\n");
-        printf("2. Cadastro de Usu·rios (Pessoa FÌsica / Volunt·rios)\n");
-        printf("3. Registro de AÁıes por OSCs\n");
-        printf("4. Listagem de AÁıes\n");
-        printf("5. InscriÁ„o de Usu·rios em AÁıes\n");
-        printf("6. VisualizaÁ„o de Participantes por AÁ„o\n");
+        printf("1. Cadastro de OSCs (Pessoa Jur√≠dica)\n");
+        printf("2. Cadastro de Usu√°rios (Pessoa F√≠sica / Volunt√°rios)\n");
+        printf("3. Registro de A√ß√µes por OSCs\n");
+        printf("4. Listagem de A√ß√µes\n");
+        printf("5. Inscri√ß√£o de Usu√°rios em A√ß√µes\n");
+        printf("6. Visualiza√ß√£o de Participantes por A√ß√£o\n");
         printf("7. Editar Pessoa (PF/PJ)\n");
         printf("8. Excluir Pessoa (PF/PJ)\n");
-        printf("9. Editar AÁ„o\n");
-        printf("10. Excluir AÁ„o\n");
-        printf("11. Excluir InscriÁ„o de Usu·rio em AÁ„o\n");
+        printf("9. Editar A√ß√£o\n");
+        printf("10. Excluir A√ß√£o\n");
+        printf("11. Excluir Inscri√ß√£o de Usu√°rio em A√ß√£o\n");
         printf("0. Sair\n");
-        printf("Digite o n˙mero da opÁ„o desejada: ");
+        printf("Digite o n√∫mero da op√ß√£o desejada: ");
         scanf("%d", &selecao);
         getchar();
 
@@ -615,9 +615,9 @@ int main() {
         case 1: {
             int tipoPessoa;
             do {
-                system("cls"); // ou system("clear") se n„o for Windows
-                printf("Cadastro de OSCs (Pessoa JurÌdica)\n");
-                printf("VocÍ È:\n1. Pessoa JurÌdica (PJ)\nDigite a opÁ„o: ");
+                system("cls"); // ou system("clear") se n√£o for Windows
+                printf("Cadastro de OSCs (Pessoa Jur√≠dica)\n");
+                printf("Voc√™ √©:\n1. Pessoa Jur√≠dica (PJ)\nDigite a op√ß√£o: ");
                 scanf("%d", &tipoPessoa);
                 getchar();
             } while (tipoPessoa != 1);
@@ -629,8 +629,8 @@ int main() {
             int tipoPessoa;
             do {
                 system("cls");
-                printf("Cadastro de Usu·rios (Pessoa FÌsica / Volunt·rios)\n");
-                printf("Escolha o tipo:\n1. Pessoa FÌsica (PF)\n2. Volunt·rio\nDigite a opÁ„o: ");
+                printf("Cadastro de Usu√°rios (Pessoa F√≠sica / Volunt√°rios)\n");
+                printf("Escolha o tipo:\n1. Pessoa F√≠sica (PF)\n2. Volunt√°rio\nDigite a op√ß√£o: ");
                 scanf("%d", &tipoPessoa);
                 getchar();
             } while (tipoPessoa != 1 && tipoPessoa != 2);
@@ -673,7 +673,7 @@ int main() {
             cont = false;
             break;
         default:
-            printf("OpÁ„o inv·lida. Tente novamente.\n");
+            printf("Op√ß√£o inv√°lida. Tente novamente.\n");
         }
     } while (cont);
 
