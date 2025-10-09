@@ -581,7 +581,8 @@ void mostrarLogo(void) {
 // ========== Função principal ==========
 
 int main() {
-    setlocale(LC_ALL, "Portuguese_Brazil.1252");
+    system("chcp 65001"); 
+    setlocale(LC_ALL, "pt_BR.UTF-8");
 
     const char *arquivoPessoas = "dados.txt";
     const char *arquivoAcoes = "acoes.txt";
