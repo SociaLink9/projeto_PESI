@@ -65,6 +65,7 @@ int main()
         printf("\nSelecione uma opcao:\n\n1. Cadastro de OSCs\n2. Cadastro de Usuários\n3. Registro de Ações por OSCs\n4. Listagem de Ações\n5. Inscrição de Usuários em Ações\n6. Visualização de Participantes por Ação\n0. Sair\nDigite o número da opção desejada: ");
         scanf("%d", &selecao);
         getchar();
+        
         // Processa a opção escolhida pelo usuário
         switch (selecao)
         {
