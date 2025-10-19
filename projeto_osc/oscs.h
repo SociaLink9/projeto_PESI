@@ -47,11 +47,11 @@ typedef struct
     char descricao[MAX];
 } NovaAcao;
 
-// FunÃ§Ãµes de apoio
+// Funções de apoio
 int somenteNumeros(char *str);
 int jaCadastrado(const char *arquivoNome, const char *documento);
 
-// FunÃ§Ãµes de cadastro
+// Funções de cadastro
 void cadastrarPessoaFisica(const char *arquivoNome);
 void cadastrarPessoaJuridica(const char *arquivoNome);
 int verificarCadastro(const char *cpf_cnpj);

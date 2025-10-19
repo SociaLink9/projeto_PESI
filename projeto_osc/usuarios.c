@@ -2,51 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
-/*
-int fazerLogin(const char* email, const char* senha) {
-    FILE* arquivo = fopen("dados.txt", "r");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo para leitura!\n");
-        return 0;
-    }
 
-    char linha[500];  // declara  variavel "linha" para salvar uma linha inteira do arquivo "dados.txt"
-    while (fgets(linha, sizeof(linha), arquivo)) { /* fgets √© uma fun√ßao quer vai ler linha
-                                                    por linha e a mesma coloca na variavel "linha" criada. */
-/* abaixo sao as variaveis temporarias criadas para analisar as linhas do arquivo e consequetemente fazer a compara√ßao abaixo do
-email e senha do usuario para login */
-/*
-int id_temp;
-char nome_temp[100], email_temp[100], senha_temp[50];
-char telefone_temp[20], cidade_temp[50], area_temp[50];
-int idade_temp;
-
-// Abaixo o sscanf vai ler as linhas dos arquivo e vai preencher as variaveis de a cordo com o formato
-if (sscanf(linha, "%d,%99[^,],%99[^,],%49[^,],%19[^,],%49[^,],%d,%49[^\n]",/* %99[^,] l√™ at√© 99 caracteres, qualquer coisa exceto v√≠rgula.
-                                      quando chegar  na virgula ele para e vai pra outra informa√ß√£o dps da virgula.*/
-/*
-
-&id_temp, nome_temp, email_temp, senha_temp,
-telefone_temp, cidade_temp, &idade_temp, area_temp) == 8) {// sscanf verifica se ele leu exatamente 8 campos . Se sim (==8), entra no bloco { }.
-if (strcmp(email_temp, email) == 0 && strcmp(senha_temp, senha) == 0) {/* strcmp √© uma Fun√ß√£o que compara duas strings, email_temp que foi lido do arquivo (dados.txt)
-e o email vindo do usuario. se for == 0 ai deu certo o login*/
-/*
-//assim vale a mesma coisa para a senha
-fclose(arquivo);
-return 1;  // Login bem-sucedido
-}
-}
-}
-
-fclose(arquivo);
-return 0;  // N√£o encontrado
-}
-*/
 int cadastro_voluntario()
 {
     Voluntario novoVol;
 
-    // A fun√ßao inicia criando uma ficha vazia e atribuindo ao volunt√°rio um novo ID, obtido ao ler o maior ID j√° presente em *dados.txt*.
+    // A funÁao inicia criando uma ficha vazia e atribuindo ao volunt·rio um novo ID, obtido ao ler o maior ID j· presente em *dados.txt*.
     // tipo, ele vai ler o dados.txt e se o maior ID do voluntario for 7, ele vai gerar um novo id "8" para o novo voluntario cadastrado.
 
     int max_id = 0;
@@ -55,60 +16,66 @@ int cadastro_voluntario()
     {
         char linha[500];
         while (fgets(linha, sizeof(linha), f))
-        { // aqui ele l√™ uma linha e coloca em linha(igual ao login).
+        { // aqui ele lÍ uma linha e coloca em linha(igual ao login).
             int id_temp;
             if (sscanf(linha, "%d,", &id_temp) == 1 && id_temp > max_id)
-            {                     // O c√≥digo l√™ o ID inicial da linha e, se v√°lido e maior que max_id, atualiza o maior ID encontrado.
-                max_id = id_temp; //  aqui faz a altera√ßao do novo id
+            {                     // O cÛdigo lÍ o ID inicial da linha e, se v·lido e maior que max_id, atualiza o maior ID encontrado.
+                max_id = id_temp; //  aqui faz a alteraÁao do novo id
             }
         }
         fclose(f);
     }
     novoVol.id = max_id + 1;
 
-    printf("\n=== CADASTRO DE VOLUNT√ÅRIO ===\n");
-    printf("ID gerado automaticamente: %d\n", novoVol.id); // aqui o novo cadastro ja recebe seu proprio ID pela fun√ßaom acima
+    printf("\n=== CADASTRO DE VOLUNT¡RIO ===\n");
+    printf("ID gerado automaticamente: %d\n", novoVol.id); // aqui o novo cadastro ja recebe seu proprio ID pela funÁaom acima
+   do
+   {
+      printf("Nome: ");
+      scanf(" %99[^\n]", novoVol.nome); // LÍ string com espaÁos (JosÈ antonio)
+      if (strlen(novoVol.nome) == 0){
+        printf("Campo vazio, tente novamente!");
+      }
+      
+   } while (strlen(novoVol.nome) == 0);
 
-    printf("Nome: ");
-    scanf(" %99[^\n]", novoVol.nome); // L√™ string com espa√ßos (Jos√© antonio)
-
+   do {
+        printf("CPF (11 dÌgitos): ");
+        fgets(novoVol.cpf, 15, stdin);
+        if (strlen(novoVol.cpf) != 11 ) {
+            printf("*CPF inv·lido. Tente novamente.*\n");
+        }
+    } while (strlen(novoVol.cpf) != 11 );
+   
+    
+    do{
     printf("Email: ");
-    scanf(" %99s", novoVol.email); // %s para email sem espa√ßos (unibra@gmail.comm)
+    scanf(" %99s", novoVol.email); // %s para email sem espaÁos (unibra@gmail.comm)
     if (strlen(novoVol.email) == 0)
     { // aqui vai verificar se o email estar vazio
-        printf("Email n√£o pode ser vazio!\n");
-        return 0; // Falha no cadastro
+        printf("Campo vazio, tente novamente\n");
+        
     }
+    }while(strlen(novoVol.email) == 0);
+     do {
+        printf("Telefone (11 dÌgitos): ");
+        fgets(novoVol.telefone, 20, stdin);
+        if (strlen(novoVol.telefone) != 11) {
+            printf("*Telefone inv·lido. Tente novamente.*\n");
+        }
+    } while (strlen(novoVol.telefone) != 11);
 
-    printf("Senha: ");
-    scanf(" %49s", novoVol.senha);
-    if (strlen(novoVol.senha) == 0)
-    { // aqui vai verificar se a senha estar vazia
-        printf("Senha n√£o pode ser vazia!\n");
-        return 0;
-    }
-
-    printf("Telefone: ");
-    scanf(" %19s", novoVol.telefone); // %s para telefone (assume sem espa√ßos)
-
+    do{
     printf("Cidade: ");
-    scanf(" %49[^\n]", novoVol.cidade); // [^\n] L√™ com espa√ßos (ex: "S√£o Paulo")
-
-    printf("Idade: ");
-    scanf("%d", &novoVol.idade);
-
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ; // Limpa o buffer de entrada ap√≥s scanf da idade
-
-    if (novoVol.idade < 0 || novoVol.idade > 150)
-    {
-        printf("Idade inv√°lida!\n");
-        return 0;
+    scanf(" %49[^\n]", novoVol.cidade); // [^\n] LÍ com espaÁos (ex: "S„o Paulo")
+    if(strlen(novoVol.cidade) == 0){
+        printf("Campo vazio, tente novamente!\n");
     }
+    }while(strlen(novoVol.cidade) == 0);
+    
 
-    printf("√Årea de Atua√ß√£o (ex: limpeza de praia): ");
-    scanf(" %49[^\n]", novoVol.area_atuacao); // L√™ com espa√ßos
+    printf("¡rea de AtuaÁ„o (ex: limpeza de praia): ");
+    scanf(" %49[^\n]", novoVol.area_atuacao); // LÍ com espaÁos
 
     // Adicionar ao arquivo (modo append)
     FILE *arquivo = fopen("dados.txt", "a"); // "a" = append (adiciona no final)
@@ -118,12 +85,11 @@ int cadastro_voluntario()
         return 0;
     }
 
-    /*Escreve todos os dados do volunt√°rio em uma linha no arquivo,
-     seguindo o formato: ID,nome,email,senha,telefone,cidade,idade,√°rea.*/
+    /*Escreve todos os dados do volunt·rio em uma linha no arquivo,
+     seguindo o formato: ID,nome,email,CPF,telefone,cidade,·rea.*/
 
     fprintf(arquivo, "%d,%s,%s,%s,%s,%s,%d,%s\n",
-            novoVol.id, novoVol.nome, novoVol.email, novoVol.senha,
-            novoVol.telefone, novoVol.cidade, novoVol.idade, novoVol.area_atuacao);
+        novoVol.id, novoVol.nome, novoVol.email,novoVol.cpf,novoVol.telefone, novoVol.cidade, novoVol.area_atuacao);
 
     if (fclose(arquivo) != 0)
     {
@@ -131,6 +97,6 @@ int cadastro_voluntario()
         return 0;
     }
 
-    printf("Volunt√°rio cadastrado com sucesso! ID: %d\n", novoVol.id);
+    printf("Volunt·rio cadastrado com sucesso! ID: %d\n", novoVol.id);
     return 1; // Sucesso
 }

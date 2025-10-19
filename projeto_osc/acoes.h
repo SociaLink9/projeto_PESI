@@ -7,8 +7,8 @@ typedef struct
     char descricao[200];
 } Acao;
 
-// FunÃ§Ã£o que lÃª todas as aÃ§Ãµes do arquivo
-void lerTodasAcoes(const char *arquivoNome);
+// Função que lê todas as ações do arquivo
+void lerTodasAcoes();
 int cpf_cadastrado(const char *arquivo, const char *cpf_busca);
 void cadastrarVoluntarioInterativo();
 void mostrarUsuariosPorAcao();

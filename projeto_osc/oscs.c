@@ -5,7 +5,7 @@
 #include <locale.h>
 #include "oscs.h"
 
-// ======= FUNÃ‡Ã•ES DE APOIO =======
+// ======= FUNÇÕES DE APOIO =======
 int somenteNumeros(char *str)
 {
     for (int i = 0; str[i] != '\0'; i++)
@@ -18,7 +18,7 @@ int somenteNumeros(char *str)
     return 1;
 }
 
-// Verifica se documento jÃ¡ existe
+// Verifica se documento já existe
 int jaCadastrado(const char *arquivoNome, const char *documento)
 {
     FILE *arq = fopen(arquivoNome, "r");
@@ -56,7 +56,7 @@ void cadastrarPessoaFisica(const char *arquivoNome)
 
     do
     {
-        printf("CPF (11 dÃ­gitos, apenas nÃºmeros): ");
+        printf("CPF (11 dígitos, apenas números): ");
         fgets(pf.cpf, TAM_CPF, stdin);
         pf.cpf[strcspn(pf.cpf, "\n")] = 0;
 
@@ -70,39 +70,76 @@ void cadastrarPessoaFisica(const char *arquivoNome)
 
         if (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf))
         {
-            printf("CPF invÃ¡lido! Tente novamente.\n");
+            printf("CPF inválido! Tente novamente.\n");
         }
         else if (jaCadastrado(arquivoNome, pf.cpf))
         {
-            printf("CPF jÃ¡ cadastrado no sistema!\n");
+            printf("CPF já cadastrado no sistema!\n");
             return;
         }
     } while (strlen(pf.cpf) != 11 || !somenteNumeros(pf.cpf));
 
-    printf("Email: ");
-    fgets(pf.email, TAM_EMAIL, stdin);
-    pf.email[strcspn(pf.email, "\n")] = 0;
-
-    printf("\n--- EndereÃ§o ---\n");
-    printf("Cidade: ");
-    fgets(pf.endereco.cidade, TAM_CIDADE, stdin);
-    pf.endereco.cidade[strcspn(pf.endereco.cidade, "\n")] = 0;
-
-    printf("Bairro: ");
-    fgets(pf.endereco.bairro, TAM_BAIRRO, stdin);
-    pf.endereco.bairro[strcspn(pf.endereco.bairro, "\n")] = 0;
-
-    printf("Rua: ");
-    fgets(pf.endereco.rua, TAM_RUA, stdin);
-    pf.endereco.rua[strcspn(pf.endereco.rua, "\n")] = 0;
-
-    printf("NÃºmero: ");
-    fgets(pf.endereco.numero, TAM_NUMERO, stdin);
-    pf.endereco.numero[strcspn(pf.endereco.numero, "\n")] = 0;
-
-    printf("CEP: ");
-    fgets(pf.endereco.cep, TAM_CEP, stdin);
-    pf.endereco.cep[strcspn(pf.endereco.cep, "\n")] = 0;
+    do
+    {
+        printf("Email: ");
+        fgets(pf.email, TAM_EMAIL, stdin);
+        pf.email[strcspn(pf.email, "\n")] = 0;
+        if (strlen(pf.email) == 0)
+        {
+            printf("*E-mail não pode estar vazio. Tente novamente.*\n");
+        }
+    } while (strlen(pf.email) == 0);
+    do
+    {
+        printf("\n--- Endereço ---\n");
+        printf("Cidade: ");
+        fgets(pf.endereco.cidade, TAM_CIDADE, stdin);
+        pf.endereco.cidade[strcspn(pf.endereco.cidade, "\n")] = 0;
+        if (strlen(pf.endereco.cidade) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(pf.endereco.cidade) == 0);
+    do
+    {
+        printf("Bairro: ");
+        fgets(pf.endereco.bairro, TAM_BAIRRO, stdin);
+        pf.endereco.bairro[strcspn(pf.endereco.bairro, "\n")] = 0;
+        if (strlen(pf.endereco.bairro) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(pf.endereco.bairro) == 0);
+    do
+    {
+        printf("Rua: ");
+        fgets(pf.endereco.rua, TAM_RUA, stdin);
+        pf.endereco.rua[strcspn(pf.endereco.rua, "\n")] = 0;
+        if (strlen(pf.endereco.rua) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(pf.endereco.rua) == 0);
+    do
+    {
+        printf("Número: ");
+        fgets(pf.endereco.numero, TAM_NUMERO, stdin);
+        pf.endereco.numero[strcspn(pf.endereco.numero, "\n")] = 0;
+        if (strlen(pf.endereco.numero) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(pf.endereco.numero) == 0);
+    do
+    {
+        printf("CEP: ");
+        fgets(pf.endereco.cep, TAM_CEP, stdin);
+        pf.endereco.cep[strcspn(pf.endereco.cep, "\n")] = 0;
+        if (strlen(pf.endereco.cep) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(pf.endereco.cep) == 0);
 
     FILE *arquivo = fopen(arquivoNome, "a");
     if (arquivo == NULL)
@@ -113,7 +150,7 @@ void cadastrarPessoaFisica(const char *arquivoNome)
 
     fprintf(arquivo,
             "Pessoa Fisica | Nome: %s | Data Nasc.: %s | CPF: %s | Email: %s | "
-            "Endereco: %s, %s, %s, NÂº %s, CEP %s\n",
+            "Endereco: %s, %s, %s, Nº %s, CEP %s\n",
             pf.nome, pf.dataNascimento, pf.cpf, pf.email,
             pf.endereco.cidade, pf.endereco.bairro, pf.endereco.rua,
             pf.endereco.numero, pf.endereco.cep);
@@ -127,13 +164,13 @@ void cadastrarPessoaJuridica(const char *arquivoNome)
     PessoaJuridica pj;
 
     printf("\n--- Cadastro de Pessoa Juridica ---\n");
-    printf("RazÃ£o Social: ");
+    printf("Razão Social: ");
     fgets(pj.razaoSocial, TAM_NOME, stdin);
     pj.razaoSocial[strcspn(pj.razaoSocial, "\n")] = 0;
 
     do
     {
-        printf("CNPJ (14 dÃ­gitos, apenas nÃºmeros): ");
+        printf("CNPJ (14 dígitos, apenas números): ");
         fgets(pj.cnpj, TAM_CNPJ, stdin);
         pj.cnpj[strcspn(pj.cnpj, "\n")] = 0;
 
@@ -147,39 +184,75 @@ void cadastrarPessoaJuridica(const char *arquivoNome)
 
         if (strlen(pj.cnpj) != 14 || !somenteNumeros(pj.cnpj))
         {
-            printf("CNPJ invÃ¡lido! Tente novamente.\n");
+            printf("CNPJ inválido! Tente novamente.\n");
         }
         else if (jaCadastrado(arquivoNome, pj.cnpj))
         {
-            printf("CNPJ jÃ¡ cadastrado no sistema!\n");
+            printf("CNPJ já cadastrado no sistema!\n");
             return;
         }
     } while (strlen(pj.cnpj) != 14 || !somenteNumeros(pj.cnpj));
-
-    printf("Email: ");
-    fgets(pj.email, TAM_EMAIL, stdin);
-    pj.email[strcspn(pj.email, "\n")] = 0;
-
-    printf("\n--- EndereÃ§o da Empresa ---\n");
-    printf("Cidade: ");
-    fgets(pj.endereco.cidade, TAM_CIDADE, stdin);
-    pj.endereco.cidade[strcspn(pj.endereco.cidade, "\n")] = 0;
-
-    printf("Bairro: ");
-    fgets(pj.endereco.bairro, TAM_BAIRRO, stdin);
-    pj.endereco.bairro[strcspn(pj.endereco.bairro, "\n")] = 0;
-
-    printf("Rua: ");
-    fgets(pj.endereco.rua, TAM_RUA, stdin);
-    pj.endereco.rua[strcspn(pj.endereco.rua, "\n")] = 0;
-
-    printf("NÃºmero: ");
-    fgets(pj.endereco.numero, TAM_NUMERO, stdin);
-    pj.endereco.numero[strcspn(pj.endereco.numero, "\n")] = 0;
-
-    printf("CEP: ");
-    fgets(pj.endereco.cep, TAM_CEP, stdin);
-    pj.endereco.cep[strcspn(pj.endereco.cep, "\n")] = 0;
+    do
+    {
+        printf("Email: ");
+        fgets(pj.email, TAM_EMAIL, stdin);
+        pj.email[strcspn(pj.email, "\n")] = 0;
+        if (strlen(pj.email) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.email) == 0);
+    do
+    {
+        printf("\n--- Endereço da Empresa ---\n");
+        printf("Cidade: ");
+        fgets(pj.endereco.cidade, TAM_CIDADE, stdin);
+        pj.endereco.cidade[strcspn(pj.endereco.cidade, "\n")] = 0;
+        if (strlen(pj.endereco.cidade) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.endereco.cidade) == 0);
+    do
+    {
+        printf("Bairro: ");
+        fgets(pj.endereco.bairro, TAM_BAIRRO, stdin);
+        pj.endereco.bairro[strcspn(pj.endereco.bairro, "\n")] = 0;
+        if (strlen(pj.endereco.bairro) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.endereco.bairro) == 0);
+    do
+    {
+        printf("Rua: ");
+        fgets(pj.endereco.rua, TAM_RUA, stdin);
+        pj.endereco.rua[strcspn(pj.endereco.rua, "\n")] = 0;
+        if (strlen(pj.endereco.rua) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.endereco.rua) == 0);
+    do
+    {
+        printf("Número: ");
+        fgets(pj.endereco.numero, TAM_NUMERO, stdin);
+        pj.endereco.numero[strcspn(pj.endereco.numero, "\n")] = 0;
+        if (strlen(pj.endereco.numero) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.endereco.numero) == 0);
+    do
+    {
+        printf("CEP: ");
+        fgets(pj.endereco.cep, TAM_CEP, stdin);
+        pj.endereco.cep[strcspn(pj.endereco.cep, "\n")] = 0;
+        if (strlen(pj.endereco.numero) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(pj.endereco.numero) == 0);
 
     FILE *arquivo = fopen(arquivoNome, "a");
     if (arquivo == NULL)
@@ -190,7 +263,7 @@ void cadastrarPessoaJuridica(const char *arquivoNome)
 
     fprintf(arquivo,
             "Pessoa Juridica | Razao Social: %s | CNPJ: %s | Email: %s | "
-            "Endereco: %s, %s, %s, NÂº %s, CEP %s\n",
+            "Endereco: %s, %s, %s, Nº %s, CEP %s\n",
             pj.razaoSocial, pj.cnpj, pj.email,
             pj.endereco.cidade, pj.endereco.bairro, pj.endereco.rua,
             pj.endereco.numero, pj.endereco.cep);
@@ -199,7 +272,7 @@ void cadastrarPessoaJuridica(const char *arquivoNome)
     printf("? Cadastro realizado com sucesso!\n");
 }
 
-// ======= PROBLEMA NA FUNÃ‡ÃƒO ABAIXO =======
+// Verifica se PF/PJ já tem cadastro
 int verificarCadastro(const char *cpf_cnpj)
 {
     FILE *arquivo = fopen("dados.txt", "r");
@@ -234,45 +307,65 @@ int verificarCadastro(const char *cpf_cnpj)
 void cadastrarAcao()
 {
     NovaAcao NovaAc;
-
-    printf("Digite seu CPF ou CNPJ: ");
-    fgets(NovaAc.cpf_cnpj, sizeof(NovaAc.cpf_cnpj), stdin);
-    NovaAc.cpf_cnpj[strcspn(NovaAc.cpf_cnpj, "\n")] = 0;
-    getchar();
+    do
+    {
+        printf("Digite seu CPF ou CNPJ: ");
+        fgets(NovaAc.cpf_cnpj, sizeof(NovaAc.cpf_cnpj), stdin);
+        NovaAc.cpf_cnpj[strcspn(NovaAc.cpf_cnpj, "\n")] = 0;
+        if (strlen(NovaAc.cpf_cnpj) == 0)
+        {
+            printf("Campo vazio, tente novamente!\n");
+        }
+    } while (strlen(NovaAc.cpf_cnpj) == 0);
 
     if (!verificarCadastro(NovaAc.cpf_cnpj))
     {
-        printf("Cadastro nÃ£o encontrado. Apenas PF ou PJ registrados podem cadastrar aÃ§Ãµes.\n");
+        printf("Cadastro não encontrado. Apenas PF ou PJ registrados podem cadastrar ações.\n");
         return;
     }
+    do
+    {
+        printf("Nome da ação: ");
+        fgets(NovaAc.nomeAcao, sizeof(NovaAc.nomeAcao), stdin);
+        NovaAc.nomeAcao[strcspn(NovaAc.nomeAcao, "\n")] = 0;
+        if (strlen(NovaAc.nomeAcao) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(NovaAc.nomeAcao) == 0);
+    do
+    {
+        printf("Local da ação: ");
+        fgets(NovaAc.localAcao, sizeof(NovaAc.localAcao), stdin);
+        NovaAc.localAcao[strcspn(NovaAc.localAcao, "\n")] = 0;
+        if (strlen(NovaAc.localAcao) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(NovaAc.localAcao) == 0);
+    do
+    {
+        printf("Descrição da ação: ");
+        fgets(NovaAc.descricao, sizeof(NovaAc.descricao), stdin);
+        NovaAc.descricao[strcspn(NovaAc.descricao, "\n")] = 0;
+        if (strlen(NovaAc.descricao) == 0)
+        {
+            printf("Campo vazio, tente novamente!");
+        }
+    } while (strlen(NovaAc.descricao) == 0);
 
-    printf("Nome da aÃ§Ã£o: ");
-    fgets(NovaAc.nomeAcao, sizeof(NovaAc.nomeAcao), stdin);
-    NovaAc.nomeAcao[strcspn(NovaAc.nomeAcao, "\n")] = 0;
-    
-
-    printf("Local da aÃ§Ã£o: ");
-    fgets(NovaAc.localAcao, sizeof(NovaAc.localAcao), stdin);
-    NovaAc.localAcao[strcspn(NovaAc.localAcao, "\n")] = 0;
-    
-
-    printf("DescriÃ§Ã£o da aÃ§Ã£o: ");
-    fgets(NovaAc.descricao, sizeof(NovaAc.descricao), stdin);
-    NovaAc.descricao[strcspn(NovaAc.descricao, "\n")] = 0;
-   
-
-    FILE *arquivo = fopen("dados.txt", "a");
+    FILE *arquivo = fopen("listadeacoes.txt", "a");
     if (!arquivo)
     {
-        printf("Erro ao salvar a aÃ§Ã£o.\n");
+        printf("Erro ao salvar a ação.\n");
         return;
     }
 
-    fprintf(arquivo, "CPF/CNPJAcao: %s\nNomeAcao: %s\nLocalAcao: %s\nDescriÃ§Ã£oAcao: %s\n---\n",
+    fprintf(arquivo, "CPF/CNPJAcao: %s\nNomeAcao: %s\nLocalAcao: %s\nDescriçãoAcao: %s\n---\n",
             NovaAc.cpf_cnpj, NovaAc.nomeAcao, NovaAc.localAcao, NovaAc.descricao);
     fclose(arquivo);
 
-    printf("AÃ§Ã£o cadastrada com sucesso!\n");
+    printf("Ação cadastrada com sucesso!\n");
 
     return;
 }

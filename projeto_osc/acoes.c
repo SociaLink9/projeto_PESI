@@ -2,47 +2,28 @@
 #include <string.h>
 #include "acoes.h"
 #include "usuarios.h"
+#include "oscs.h"
 
-void lerTodasAcoes(const char *arquivoNome)
+void lerTodasAcoes()
 {
-    FILE *arquivo = fopen(arquivoNome, "r");
-    if (!arquivo)
-    {
-        perror("Erro ao abrir o arquivo");
+    FILE *arquivoNome = fopen("listadeacoes.txt", "r");
+    char linha[256];
+
+    if (!arquivoNome) {
+        printf("N„o foi possÌvel abrir o arquivo.\n");
         return;
     }
 
-    char linha[256];
-    Acao acao;
-    int contador = 0;
-
-    while (fgets(linha, sizeof(linha), arquivo))
-    {
-        linha[strcspn(linha, "\n")] = '\0';
-
-        if (strncmp(linha, "NomeAcao:", 9) == 0)
-        {
-            strcpy(acao.nome, linha + 9);
-            while (fgets(linha, sizeof(linha), arquivo))
-            {
-                linha[strcspn(linha, "\n")] = '\0';
-
-                if (strncmp(linha, "Descricao:", 10) == 0)
-                {
-                    strcpy(acao.descricao, linha + 10);
-                }
-            }
-
-            printf("A√ß√£o %d:\n", ++contador);
-            printf("  Nome: %s\n", acao.nome);
-            printf("  Descri√ß√£o: %s\n", acao.descricao);
-        }
+    printf("AÁıes cadastradas:\n");
+    while (fgets(linha, sizeof(linha), arquivoNome)) {
+        printf("\n%s", linha);
     }
 
-    fclose(arquivo);
+    fclose(arquivoNome);
 }
 
-// Retorna 1 se o CPF estiver cadastrado, 0 caso contr√°rio
+
+// Retorna 1 se o CPF estiver cadastrado, 0 caso contr·rio
 int cpf_cadastrado(const char *arquivo, const char *cpf_busca)
 {
     FILE *fp = fopen(arquivo, "r");
@@ -63,7 +44,7 @@ int cpf_cadastrado(const char *arquivo, const char *cpf_busca)
                 char cpf_lido[20];
                 sscanf(ptr_cpf, "CPF: %s", cpf_lido);
 
-                // Remove poss√≠veis quebras de linha
+                // Remove possÌveis quebras de linha
                 cpf_lido[strcspn(cpf_lido, "\n")] = '\0';
 
                 if (strcmp(cpf_lido, cpf_busca) == 0)
@@ -80,22 +61,33 @@ int cpf_cadastrado(const char *arquivo, const char *cpf_busca)
 }
 void cadastrarVoluntarioInterativo()
 {
-    char cpf[20], nome[100], funcao[100], nomeAcao[100];
+    FILE *arquivo = fopen("dados.txt", "r");
+    if (!arquivo)
+    {
+        perror("Erro ao abrir dados.txt");
+        return;
+    }
 
-    // Solicita os dados ao usu√°rio
-    printf("Digite o CPF do volunt√°rio: ");
+    char cpf[20], nome[100], funcao[100], nomeAcao[100];
+    
+    // Solicita os dados ao usu·rio
+    printf("Digite o CPF do volunt·rio: ");
     fgets(cpf, sizeof(cpf), stdin);
     cpf[strcspn(cpf, "\n")] = '\0'; // Remove quebra de linha
+    if(!jaCadastrado(arquivo,cpf)){
+        printf("Voluntario n„o cadastrado!");
+        return;
+    }
 
-    printf("Digite o nome do volunt√°rio: ");
+    printf("Digite o nome do volunt·rio: ");
     fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = '\0';
 
-    printf("Digite a fun√ß√£o do volunt√°rio na a√ß√£o: ");
+    printf("Digite a funÁ„o do volunt·rio na aÁ„o: ");
     fgets(funcao, sizeof(funcao), stdin);
     funcao[strcspn(funcao, "\n")] = '\0';
 
-    printf("Digite o nome da a√ß√£o: ");
+    printf("Digite o nome da aÁ„o: ");
     fgets(nomeAcao, sizeof(nomeAcao), stdin);
     nomeAcao[strcspn(nomeAcao, "\n")] = '\0';
 
@@ -110,19 +102,18 @@ void cadastrarVoluntarioInterativo()
     fprintf(fp, "CPF:%s | Nome:%s | Funcao:%s | NomeAcao:%s\n", cpf, nome, funcao, nomeAcao);
     fclose(fp);
 
-    printf("\n‚úÖ Volunt√°rio %s cadastrado na a√ß√£o '%s' como '%s'.\n", nome, nomeAcao, funcao);
+    printf("\nVolunt·rio %s cadastrado na aÁ„o '%s' como '%s'.\n", nome, nomeAcao, funcao);
 }
 
-#include <stdio.h>
-#include <string.h>
 
-// Mostra todos os volunt√°rios cadastrados em uma a√ß√£o espec√≠fica
+
+// Mostra todos os volunt·rios cadastrados em uma aÁ„o especÌfica
 void mostrarUsuariosPorAcao()
 {
     char nomeAcaoBusca[100];
 
-    // Solicita ao usu√°rio o nome da a√ß√£o
-    printf("Digite o nome da a√ß√£o que deseja visualizar: ");
+    // Solicita ao usu·rio o nome da aÁ„o
+    printf("Digite o nome da aÁ„o que deseja visualizar: ");
     fgets(nomeAcaoBusca, sizeof(nomeAcaoBusca), stdin);
     nomeAcaoBusca[strcspn(nomeAcaoBusca, "\n")] = '\0'; // Remove quebra de linha
 
@@ -136,29 +127,33 @@ void mostrarUsuariosPorAcao()
     char linha[512];
     int encontrados = 0;
 
-    printf("\nüîç Volunt√°rios na a√ß√£o '%s':\n", nomeAcaoBusca);
+    printf("\n Volunt·rios na aÁ„o '%s':\n", nomeAcaoBusca);
     printf("--------------------------------------------------\n");
 
     while (fgets(linha, sizeof(linha), fp))
     {
         linha[strcspn(linha, "\n")] = '\0';
 
-        // Verifica se a linha cont√©m a a√ß√£o buscada
+        // Verifica se a linha contÈm a aÁ„o buscada
         if (strstr(linha, nomeAcaoBusca))
         {
             char nome[100], funcao[100];
+            char id[100];
 
-            // Extrai nome e fun√ß√£o
+            // Extrai nome e funÁ„o
+            char *ptr_id = strstr(linha,"Id:");
             char *ptr_nome = strstr(linha, "Nome:");
             char *ptr_funcao = strstr(linha, "Funcao:");
 
-            if (ptr_nome && ptr_funcao)
+            if (ptr_id && ptr_nome && ptr_funcao)
             {
+                sscanf(ptr_id, "Id:%[^|]", id);
                 sscanf(ptr_nome, "Nome:%[^|]", nome);
                 sscanf(ptr_funcao, "Funcao:%[^|]", funcao);
-
+                
+                printf("Id: %s\n", id);
                 printf("Nome: %s\n", nome);
-                printf("Fun√ß√£o: %s\n", funcao);
+                printf("FunÁ„o: %s\n", funcao);
                 printf("--------------------------------------------------\n");
                 encontrados++;
             }
@@ -169,10 +164,10 @@ void mostrarUsuariosPorAcao()
 
     if (encontrados == 0)
     {
-        printf("Nenhum volunt√°rio encontrado para essa a√ß√£o.\n");
+        printf("Nenhum volunt·rio encontrado para essa aÁ„o.\n");
     }
     else
     {
-        printf("Total de volunt√°rios encontrados: %d\n", encontrados);
+        printf("Total de volunt·rios encontrados: %d\n", encontrados);
     }
 }

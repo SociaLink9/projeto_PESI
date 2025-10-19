@@ -1,7 +1,7 @@
 /*
  Projeto: Plataforma de Engajamento Social
- Curso: An√°lise e Desenvolvimento de Sistemas
- L√≠der de projeto: Gabriel Albuquerque N. de Oliveira
+ Curso: An·lise e Desenvolvimento de Sistemas
+ LÌder de projeto: Gabriel Albuquerque N. de Oliveira
  Integrantes:
  David Richard Lima de Souza
  Luan Santos Alves Pequeno Da Silva
@@ -11,7 +11,7 @@
  Geovane Alves da Silva Filho
  Gabriela Torres Guerra da Fonte
  Guilherme Morais Cavalcante
- Jo√£o Vitor Santos silva
+ Jo„o Vitor Santos silva
  */
 
 #include <stdio.h>
@@ -22,7 +22,7 @@
 #include "oscs.h"
 #include "acoes.h"
 
-// Fun√ß√£o de logotipo(Aguardando posicionamento do grupo comecial sobre nome do produto.)
+// FunÁ„o de logotipo(Aguardando posicionamento do grupo comecial sobre nome do produto.)
 void mostrarLogo(void)
 {
     printf(".====================================================================.\n");
@@ -36,20 +36,21 @@ void mostrarLogo(void)
     printf("!                                                                    !\n");
     printf("!   Plataforma de Engajamento Social Integrado (P.E.S.I.)            !\n");
     printf("!                                                                    !\n");
-    printf("!   Bem-vindo √† transforma√ß√£o digital do engajamento!                !\n");
-    printf("!   Conectando ideias, pessoas e prop√≥sitos com intelig√™ncia.        !\n");
+    printf("!   Bem-vindo ‡ transformaÁ„o digital do engajamento!                !\n");
+    printf("!   Conectando ideias, pessoas e propÛsitos com inteligÍncia.        !\n");
     printf(".====================================================================.\n");
 }
 
 int main()
 {
-    // Configura a localiza√ß√£o para permitir acentua√ß√£o (pode n√£o funcionar em todos os sistemas)
-    setlocale(LC_ALL, "pt-BR");
+    // ConfiguraÁ„o de idioma - OK
+    setlocale(LC_ALL, "Portuguese_Brazil");
 
     // Ponteiro para o nome do arquivo de dados
-    const *arquivo = "dados.txt";
+    const *arquivo1 = "dados.txt";
+    
 
-    // Vari√°veis de sele√ß√£o e controle
+    // Vari·veis de seleÁ„o e controle
     int selecao;
     bool cont = true;
     bool valid;
@@ -57,24 +58,24 @@ int main()
     // Exibe o logotipo do sistema
     mostrarLogo();
 
-    // Estrutura de loop para exibir o menu principal enquanto o usu√°rio n√£o escolher sair
+    // Estrutura de loop para exibir o menu principal enquanto o usu·rio n„o escolher sair
     do
     {
-        // Exibe as op√ß√µes do menu
+        // Exibe as opÁıes do menu
 
-        printf("\nSelecione uma opcao:\n\n1. Cadastro de OSCs\n2. Cadastro de Usu√°rios\n3. Registro de A√ß√µes por OSCs\n4. Listagem de A√ß√µes\n5. Inscri√ß√£o de Usu√°rios em A√ß√µes\n6. Visualiza√ß√£o de Participantes por A√ß√£o\n0. Sair\nDigite o n√∫mero da op√ß√£o desejada: ");
+        printf("\nSelecione uma opcao:\n\n1. Cadastro de OSCs\n2. Cadastro de Usu·rios\n3. Registro de AÁıes por OSCs\n4. Listagem de AÁıes\n5. InscriÁ„o de Usu·rios em AÁıes\n6. VisualizaÁ„o de Participantes por AÁ„o\n0. Sair\nDigite o n˙mero da opÁ„o desejada: ");
         scanf("%d", &selecao);
         getchar();
-        
-        // Processa a op√ß√£o escolhida pelo usu√°rio
+
+        // Processa a opÁ„o escolhida pelo usu·rio
         switch (selecao)
         {
         case 1: // Cadastro de OSCs
-            // Submenu para escolher entre Pessoa F√≠sica ou Jur√≠dica
+            // Submenu para escolher entre Pessoa FÌsica ou JurÌdica
             do
             {
                 system("cls");
-                printf("Voc√™ √©:\n1. PF\n2. PJ\nDigite a op√ß√£o desejada:");
+                printf("VocÍ È:\n1. PF\n2. PJ\nDigite a opÁ„o desejada:");
                 scanf("%d", &selecao);
                 getchar(); // Limpa o buffer do teclado
 
@@ -82,35 +83,35 @@ int main()
                 {
                 case 1:
                     system("cls");
-                    // Chama fun√ß√£o para cadastrar Pessoa F√≠sica
-                    cadastrarPessoaFisica(arquivo);
+                    // Chama funÁ„o para cadastrar Pessoa FÌsica
+                    cadastrarPessoaFisica(arquivo1);
                     valid = true;
                     break;
                 case 2:
                     system("cls");
-                    // Chama fun√ß√£o para cadastrar Pessoa Jur√≠dica
-                    cadastrarPessoaJuridica(arquivo);
+                    // Chama funÁ„o para cadastrar Pessoa JurÌdica
+                    cadastrarPessoaJuridica(arquivo1);
                     valid = true;
                     break;
                 default:
                     system("cls");
-                    // Op√ß√£o inv√°lida, solicita nova tentativa
-                    printf("\nOp√ß√£o invalida!\nTente novamente!");
+                    // OpÁ„o inv·lida, solicita nova tentativa
+                    printf("\nOpÁ„o invalida!\nTente novamente!");
                     valid = false;
                     break;
                 }
             } while (valid != true);
 
-            // Pausa para o usu√°rio visualizar o resultado
+            // Pausa para o usu·rio visualizar o resultado
             system("pause");
             system("cls");
             break;
 
             //*Fase cadastro de OSC's concluida e pronta para testes.*
 
-        case 2: // Cadastro de usu√°rios
+        case 2: // Cadastro de usu·rios
             system("cls");
-            // Chama fun√ß√£o para cadastrar volunt√°rio
+            // Chama funÁ„o para cadastrar volunt·rio
             cadastro_voluntario();
             system("pause");
             system("cls");
@@ -118,32 +119,32 @@ int main()
 
             //*Fase cadastro de Voluntarios concluida e pronta para testes.*
 
-        case 3: // Registro de a√ß√µes por OSCs
+        case 3: // Registro de aÁıes por OSCs
             system("cls");
-            // Chama fun√ß√£o para cadastrar a√ß√£o
+            // Chama funÁ„o para cadastrar aÁ„o
             cadastrarAcao();
             system("pause");
             system("cls");
             break;
-            //*Fase cadastro de a√ß√µes concluida e pronta para testes.*
+            //*Fase cadastro de aÁıes concluida e pronta para testes.*
 
-        case 4: // Listagem das a√ß√µes
+        case 4: // Listagem das aÁıes
             system("cls");
-            lerTodasAcoes(arquivo);
+            lerTodasAcoes();
             system("pause");
             system("cls");
             break;
-            //*Fase leitura de a√ß√µes concluida e pronta para testes.*
+            //*Fase leitura de aÁıes concluida e pronta para testes.*
 
-        case 5: // Inscri√ß√£o de usu√°rios em a√ß√µes
+        case 5: // InscriÁ„o de usu·rios em aÁıes
             system("cls");
             cadastrarVoluntarioInterativo();
             system("pause");
             system("cls");
             break;
-            //*Fase inscri√ß√µes de voluntario nas a√ß√µes concluida e pronta para testes.*
+            //*Fase inscriÁıes de voluntario nas aÁıes concluida e pronta para testes.*
 
-        case 6: // Visualiza√ß√£o de participantes por a√ß√£o
+        case 6: // VisualizaÁ„o de participantes por aÁ„o
             system("cls");
             mostrarUsuariosPorAcao();
             system("pause");
@@ -158,13 +159,13 @@ int main()
             break;
 
         default:
-            // Op√ß√£o inv√°lida, solicita nova tentativa
+            // OpÁ„o inv·lida, solicita nova tentativa
             printf("Opcao invalida!\nTente novamente");
             break;
         }
 
-    } while (cont != false); // O loop se rompe quando a vari√°vel for falsa
+    } while (cont != false); // O loop se rompe quando a vari·vel for falsa
 
-    // Retorna 0 indicando execu√ß√£o bem-sucedida
+    // Retorna 0 indicando execuÁ„o bem-sucedida
     return 0;
 }
